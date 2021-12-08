@@ -1,0 +1,38 @@
+
+.header {
+    height: 80px;
+    /*padding: 5px;*/
+    text-align: center;
+    background: #FF69B4;
+    color: 6c3082;
+    font-size: 30px;
+    margin: 0px;
+}
+
+
+.button1 {
+    background-color: white;
+    color: 6c3082;
+    border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+    background-color: #FF6347;
+    color: white;
+}
+.button {
+    background-color: #FFB6C1; /* Green */
+    width: 190px;
+    height: 50px;
+    border: 5px solid #FF69B4;
+    border-radius: 10px;
+    color: 6c3082;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 30px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
