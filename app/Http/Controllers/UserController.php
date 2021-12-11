@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterRequest;
 use App\Models\File;
 use App\Models\Role;
 use App\Models\User;
-//use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
@@ -28,7 +26,6 @@ class UserController extends Controller
         else{
         return Redirect::back()->withErrors(['msg' => 'you can not access this section']);
         }
-
     }
 
     /**
@@ -97,18 +94,6 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -130,14 +115,14 @@ class UserController extends Controller
 
         $username = session()->get('username');
 
-        $filesize = File::query()->join('users' , 'files.user_id' , '=' , 'users.id')
-            ->where('users.username' , $username )->sum('size');
-        $userCredit = File::query()->join('users' , 'files.user_id' , '=' , 'users.id')
-            ->where('users.username' , $username )->sum('price');
-        $downloadNumbers = File::query()->join('users' , 'files.user_id' , '=' , 'users.id')
-            ->where('users.username' , $username )->select('download_numbers')->value('download_numbers');
-        $data= ['fileSize' => $filesize, 'userCredit' => $userCredit, 'downloadNumbers' => $downloadNumbers];
-//         dd($data);
+        $filesize = File::query()->join('users', 'files.user_id', '=', 'users.id')
+            ->where('users.username', $username)->sum('size');
+        $userCredit = File::query()->join('users', 'files.user_id', '=', 'users.id')
+            ->where('users.username', $username)->sum('price');
+        $downloadNumbers = File::query()->join('users', 'files.user_id', '=', 'users.id')
+            ->where('users.username', $username)->select('download_numbers')->value('download_numbers');
+        $data = ['fileSize' => $filesize, 'userCredit' => $userCredit, 'downloadNumbers' => $downloadNumbers];
+
         return view('userViews.userPanel', ['data' => $data]);
     }
 

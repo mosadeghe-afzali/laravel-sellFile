@@ -1,17 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Role;
+
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use phpDocumentor\Reflection\Utils;
+use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
-{
+    {
     public function showLoginPage(){
         return view('userViews.login');
     }
@@ -41,7 +40,6 @@ class AuthController extends Controller
                 ->value('roles.role');
             return $role;
         }
-
     }
 
     public function logout()

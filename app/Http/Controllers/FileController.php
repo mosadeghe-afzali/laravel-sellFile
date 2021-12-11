@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FileUploadRequest;
 use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\FileUploadRequest;
 
 class FileController extends Controller
 {
@@ -48,17 +48,15 @@ class FileController extends Controller
             $request->file_name->move($dirPath, $name);
             $link = 'storage/app/public/uploads' . '/' . $name;
 
-                $userUsername = session()->get('username');
-                $userId = User::query()->where('username', $userUsername)->value('id');
+            $userUsername = session()->get('username');
+            $userId = User::query()->where('username', $userUsername)->value('id');
             $fileType = strtolower(pathinfo($_FILES["file_name"]["name"], PATHINFO_EXTENSION));
 
             $file = File::query()->create(['file_name' => $_FILES['file_name']['name'],
                 'size' => $_FILES['file_name']['size'], 'price' => $request->price,
                 'type' => $fileType, 'description' => $request->description,
                 'upload_date' => date('Y-m-d'), 'user_id' => $userId, 'is_guest' => 0, 'link' => $link]);
-
         }
-
     }
 
     /**
@@ -90,19 +88,6 @@ class FileController extends Controller
         else{
          return Redirect::back()->withErrors(['msg' => 'you can not access this section']);
         }
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-
     }
 
     /**
@@ -119,7 +104,6 @@ class FileController extends Controller
         }
         else{
             return Redirect::back()->withErrors(['msg' => 'you can not access this section']);
-
         }
     }
     public function list(){
