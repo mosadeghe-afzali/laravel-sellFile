@@ -10,12 +10,15 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
+{
+    
+    public function showLoginPage()
     {
-    public function showLoginPage(){
         return view('userViews.login');
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $username = $request->username;
         $password = $request->password;
         if( Auth::attempt(['username' => $username, 'password' => $password]))
@@ -29,7 +32,8 @@ class AuthController extends Controller
         }
     }
 
-    public static function userLevel(){
+    public static function userLevel()
+    {
         if(Session::has('username')) {
             $username = session()->get('username');
             $userId = User::query()->where('username', $username)->value('id');
